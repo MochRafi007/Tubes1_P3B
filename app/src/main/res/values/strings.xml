@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">M0317073</string>
+    <string name="et_text_page1">Input some text</string>
+    <string name="btn_clckme">CLICK ME</string>
+    <string name="right_drawer_text">This is Right Drawer</string>
+    <string name="left_drawer_text">Home</string>
+    <string name="second_fragment_text">This is Second Fragment Text</string>
+    <string name="left_drawer_text_1">Page2</string>
+    <string name="left_drawer_text_2">Exit</string>
+    <string name="openDrawer">open drawer</string>
+    <string name="closeDrawer">close drawer</string>
+</resources>

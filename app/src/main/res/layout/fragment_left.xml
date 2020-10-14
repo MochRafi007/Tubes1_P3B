@@ -10,25 +10,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_home"
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:text="@string/left_drawer_text"></Button>
-
-        <Button
-            android:id="@+id/btn_page2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:text="@string/left_drawer_text_1"></Button>
-
-        <Button
-            android:id="@+id/btn_exit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:text="@string/left_drawer_text_2"></Button>
+            android:id="@+id/list_view">
+        </ListView>
     </LinearLayout>
 </FrameLayout>

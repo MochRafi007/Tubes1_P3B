@@ -1,4 +1,4 @@
-package com.example.m0317073;
+package com.example.m0317073.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,9 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toolbar;
+
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.m0317073.R;
 
 public class MainFragment extends Fragment {
     private FragmentListener listener;

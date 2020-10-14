@@ -39,23 +39,7 @@
             android:id="@+id/fragment_left"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:name="com.example.m0317073.LeftFragment"
-            >
-        </fragment>
-    </RelativeLayout>
-
-    <!-- Right Drawer -->
-
-    <RelativeLayout
-        android:id="@+id/right_drawer"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end" >
-        <fragment
-            android:id="@+id/fragment_right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:name="com.example.m0317073.RightFragment"
+            android:name="com.example.m0317073.Fragment.LeftFragment"
             >
         </fragment>
     </RelativeLayout>

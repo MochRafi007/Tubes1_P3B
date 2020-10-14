@@ -1,4 +1,4 @@
-package com.example.m0317073;
+package com.example.m0317073.Fragment;
 
 
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
+
+import com.example.m0317073.R;
 
 public class ResultDialogFragment extends DialogFragment {
     private TextView textView;

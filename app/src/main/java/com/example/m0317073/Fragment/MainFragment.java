@@ -6,8 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toolbar;
+import android.widget.TextView;
 
 
 import androidx.fragment.app.Fragment;
@@ -17,7 +16,7 @@ import com.example.m0317073.R;
 
 public class MainFragment extends Fragment {
     private FragmentListener listener;
-    private EditText etText;
+    private TextView textView;
     private Button btnClickMe;
 
     @Override
@@ -43,15 +42,15 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
-        this.btnClickMe = view.findViewById(R.id.btn_clickme);
-        this.etText = view.findViewById(R.id.et_text);
+        this.btnClickMe = view.findViewById(R.id.btn_cari);
+        this.textView = view.findViewById(R.id.tv_makan_apa);
 
         this.btnClickMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ResultDialogFragment rdf=new ResultDialogFragment();
                 FragmentTransaction ft=getFragmentManager().beginTransaction();
-                rdf.show(ft,"The result is : "+"\n"+etText.getText().toString());
+                rdf.show(ft,"The result is : "+"\n"+textView.getText().toString());
 
 //                String input = etText.getText().toString();
 //                if(!input.isEmpty()){

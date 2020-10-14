@@ -5,16 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.m0317073.Adapder.NavigationListAdapter;
 import com.example.m0317073.R;
 
-public class LeftFragment extends Fragment implements View.OnClickListener {
-    private Button home;
-    private Button page2;
-    private Button exit;
+public class LeftFragment extends Fragment {
     private FragmentListener listener;
 
     @Override
@@ -36,34 +36,51 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
     }
 
     public LeftFragment(){
-
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_left, container, false);
-        this.home = view.findViewById(R.id.btn_home);
-        this.page2 = view.findViewById(R.id.btn_page2);
-        this.exit = view.findViewById(R.id.btn_exit);
+    ListView list;
 
-        this.home.setOnClickListener(this);
-        this.page2.setOnClickListener(this);
-        this.exit.setOnClickListener(this);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_left, container, false);
+        final String[] itemname = {
+                "Home",
+                "Menu",
+                "Exit"
+        };
+
+        Integer[] imgid = {
+                R.drawable.ic_cafe,
+                R.drawable.ic_menu,
+                R.drawable.ic_logout
+        };
+
+        NavigationListAdapter adapter = new NavigationListAdapter(getActivity(), itemname, imgid);
+        list = (ListView) view.findViewById(R.id.list_view);
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                switch (selectedItem){
+                    case "Home":
+                        listener.changePage(1);
+                        getActivity().setTitle("Makan Apa");
+                        break;
+                    case "Menu" :
+                        listener.changePage(2);
+                        getActivity().setTitle("Menu");
+                        break;
+                    case "Exit" :
+                        listener.closeApplication();
+                        break;
+                }
+            }
+        });
         return view;
-    }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId()==this.home.getId()){
-            listener.changePage(1);
-            getActivity().setTitle("Makan Apa");
-        }
-        else if(v.getId()==this.page2.getId()){
-            listener.changePage(2);
-            getActivity().setTitle("Page 2");
-        }
-        else if(v.getId()==this.exit.getId()){
-            listener.closeApplication();
-        }
     }
 }

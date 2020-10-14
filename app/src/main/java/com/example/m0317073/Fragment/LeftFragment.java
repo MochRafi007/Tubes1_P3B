@@ -1,4 +1,4 @@
-package com.example.m0317073;
+package com.example.m0317073.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.m0317073.R;
 
 public class LeftFragment extends Fragment implements View.OnClickListener {
     private Button home;
@@ -54,9 +56,11 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(v.getId()==this.home.getId()){
             listener.changePage(1);
+            getActivity().setTitle("Makan Apa");
         }
         else if(v.getId()==this.page2.getId()){
             listener.changePage(2);
+            getActivity().setTitle("Page 2");
         }
         else if(v.getId()==this.exit.getId()){
             listener.closeApplication();

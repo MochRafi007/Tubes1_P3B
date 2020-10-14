@@ -7,7 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.Window;
+
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.m0317073.Fragment.FragmentListener;
+import com.example.m0317073.Fragment.MainFragment;
+import com.example.m0317073.Fragment.SecondFragment;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
     private Toolbar toolbar;
@@ -43,17 +49,18 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         if(page==1){
             if(this.mainFragment.isAdded()){
                 ft.show(this.mainFragment);
-                this.drawer.closeDrawers();
+
             }else{
                 ft.add(R.id.fragment_container, this.mainFragment);
             }
             if(this.secondFragment.isAdded()){
+                this.drawer.closeDrawers();
                 ft.hide(this.secondFragment);
             }
         }else if(page==2){
             if(this.secondFragment.isAdded()){
-                ft.show(this.secondFragment);
                 this.drawer.closeDrawers();
+                ft.show(this.secondFragment);
             }else{
                 ft.add(R.id.fragment_container, this.secondFragment)
                         .addToBackStack(null);

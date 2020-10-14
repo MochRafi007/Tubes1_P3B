@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Menu</string>
-    <string name="et_text_page1">Input some text</string>
-    <string name="btn_clckme">CLICK ME</string>
+    <string name="app_name">M0317073</string>
+    <string name="et_text_page1">Makan Apa Kita \n Hari Ini ?</string>
+    <string name="btn_clckme">Cari</string>
     <string name="right_drawer_text">This is Right Drawer</string>
     <string name="left_drawer_text">Home</string>
     <string name="second_fragment_text">This is Second Fragment Text</string>

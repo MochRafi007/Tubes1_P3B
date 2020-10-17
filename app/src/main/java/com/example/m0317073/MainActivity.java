@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.m0317073.Fragment.FragmentListener;
 import com.example.m0317073.Fragment.MainFragment;
+import com.example.m0317073.Fragment.MakeMenuFragment;
 import com.example.m0317073.Fragment.SecondFragment;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private SecondFragment secondFragment;
     private MainFragment mainFragment;
     public FragmentManager fragmentManager;
+    private MakeMenuFragment makeMenuFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         this.mainFragment = new MainFragment();
         this.secondFragment = new SecondFragment();
         this.fragmentManager = this.getSupportFragmentManager();
+        this.makeMenuFragment= new MakeMenuFragment();
 
         //Toolbar
         this.drawer = findViewById(R.id.drawer_layout);
@@ -69,6 +72,18 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 ft.hide(this.mainFragment);
             }
         }
+        else if(page==3){
+            if(this.makeMenuFragment.isAdded()){
+                ft.show(this.makeMenuFragment);
+            }else{
+                ft.add(R.id.fragment_container, this.makeMenuFragment)
+                        .addToBackStack(null);
+            }
+            if(this.secondFragment.isAdded()){
+                ft.hide(this.secondFragment);
+            }
+        }
+
         ft.commit();
     }
 

@@ -7,13 +7,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.Window;
+import android.widget.ExpandableListView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.m0317073.Adapder.ListMakanan;
 import com.example.m0317073.Fragment.FragmentListener;
 import com.example.m0317073.Fragment.MainFragment;
 import com.example.m0317073.Fragment.SecondFragment;
+import com.example.m0317073.Model.Makanan;
+
+
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
     private Toolbar toolbar;
@@ -42,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 .addToBackStack(null)
                 .commit();
     }
-
 
     public void changePage(int page){
         FragmentTransaction ft = this.fragmentManager.beginTransaction();

@@ -68,11 +68,9 @@ public class LeftFragment extends Fragment {
                 switch (selectedItem){
                     case "Home":
                         listener.changePage(1);
-                        getActivity().setTitle("Makan Apa");
                         break;
                     case "Menu" :
                         listener.changePage(2);
-                        getActivity().setTitle("Menu");
                         break;
                     case "Exit" :
                         listener.closeApplication();

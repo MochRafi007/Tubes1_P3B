@@ -68,4 +68,15 @@ public class MainFragment extends Fragment {
         });
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("Makan Apa");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 }

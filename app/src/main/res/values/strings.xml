@@ -2,8 +2,12 @@
     <string name="app_name">Makan Apa</string>
     <string name="tv_text_page1">Makan Apa Kita Hari Ini ?</string>
     <string name="btn_cari">Cari</string>
-    <string name="right_drawer_text">This is Right Drawer</string>
-    <string name="second_fragment_text">This is Second Fragment Text</string>
+    <string name="nama_makanan">Nama Makanan</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="tag">Tag</string>
+    <string name="bahan">Bahan</string>
+    <string name="langkah">Langkah Memasak</string>
+    <string name="resto">Tersedia di resto</string>
     <string name="openDrawer">open drawer</string>
     <string name="closeDrawer">close drawer</string>
     <string-array name="nav_menu">

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -20,7 +21,7 @@ import com.example.m0317073.Model.Makanan;
 
 
 
-public class MainActivity extends AppCompatActivity implements FragmentListener {
+public class MainActivity extends AppCompatActivity implements FragmentListener, View.OnClickListener {
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private SecondFragment secondFragment;
@@ -87,7 +88,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             }
         }
 
+
         ft.commit();
+    }
+
+    public void onClick(View view)
+    {
+
     }
 
     @Override

@@ -51,7 +51,7 @@ public class LeftFragment extends Fragment {
                 "Exit"
         };
 
-        Integer[] imgid = {
+        final Integer[] imgid = {
                 R.drawable.ic_cafe,
                 R.drawable.ic_menu,
                 R.drawable.ic_logout

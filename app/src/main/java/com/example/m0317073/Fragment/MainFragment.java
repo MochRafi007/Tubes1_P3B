@@ -15,9 +15,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.m0317073.R;
 
 public class MainFragment extends Fragment {
-    private FragmentListener listener;
+    public FragmentListener listener;
     private TextView textView;
     private Button btnClickMe;
+    public SecondFragment secondFragment;
 
     @Override
     public void onAttach(Context context) {
@@ -44,13 +45,20 @@ public class MainFragment extends Fragment {
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
         this.btnClickMe = view.findViewById(R.id.btn_cari);
         this.textView = view.findViewById(R.id.tv_makan_apa);
-
+        this.secondFragment = new SecondFragment();
         this.btnClickMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ResultDialogFragment rdf=new ResultDialogFragment();
                 FragmentTransaction ft=getFragmentManager().beginTransaction();
-                rdf.show(ft,"The result is : "+"\n"+textView.getText().toString());
+
+                if(v==btnClickMe)
+                {
+                    listener.changePage(2);
+                }
+
+
+//                rdf.show(ft,"The result is : "+"\n"+textView.getText().toString());
 
 //                String input = etText.getText().toString();
 //                if(!input.isEmpty()){
@@ -68,6 +76,7 @@ public class MainFragment extends Fragment {
         });
         return view;
     }
+
 
     @Override
     public void onResume() {

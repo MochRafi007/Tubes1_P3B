@@ -32,7 +32,7 @@ public class NavigationListAdapter extends ArrayAdapter<String> {
         TextView txtTitle = (TextView) rowView.findViewById(R.id.tv_nav_menu);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon_nav_menu);
 
-        txtTitle.setText(itemname[position]);
+        txtTitle.setText(this.itemname[position]);
         imageView.setImageResource(imgid[position]);
         return rowView;
     }

@@ -18,8 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:textColor="@color/orange"
-        android:gravity="center"
+        android:textColor="#0E0D0C"
+        android:gravity="left"
+        android:textSize="15dp"
         android:textAppearance="?android:attr/textAppearanceLarge">
     </TextView>
+
 </LinearLayout>

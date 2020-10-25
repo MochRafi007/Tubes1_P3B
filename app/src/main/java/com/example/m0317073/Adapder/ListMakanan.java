@@ -28,7 +28,11 @@ public class ListMakanan extends BaseAdapter {
         this.listItems = new ArrayList<>();
         this.mainPresenter = mainPresenter;
     }
-
+    public void update(List<Menu> menu) {
+        this.listItems.clear();
+        this.listItems.addAll(menu);
+        this.notifyDataSetChanged();
+    }
 
     @Override
     public int getCount() {
@@ -43,12 +47,6 @@ public class ListMakanan extends BaseAdapter {
     @Override
     public long getItemId(int i) {
         return 0;
-    }
-
-    public void update(List<Menu> menu) {
-        this.listItems.clear();
-        this.listItems.addAll(menu);
-        this.notifyDataSetChanged();
     }
 
     @Override

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
@@ -228,8 +229,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
 
     @Override
     public void saveFile(String menu) {
-        File fileMenu = new File(this.getFilesDir(), FILE_NAME);
-        try (FileOutputStream fileOutput = openFileOutput(FILE_NAME, MODE_PRIVATE)) {
+        File fileMenu = new File(this.getFilesDir(), "menu.txt");
+        try (FileOutputStream fileOutput = openFileOutput("menu.txt", MODE_APPEND)) {
             if (!fileMenu.exists()){
                 fileMenu.createNewFile();
             }
@@ -242,12 +243,14 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
 
     @Override
     public String readFile() {
-        File fileMenu = new File(this.getFilesDir(), FILE_NAME);
+        File fileMenu = new File(this.getFilesDir(), "menu.txt");
+        Log.d("dir", "readFile: "+ fileMenu);
         try(FileInputStream fileInputStream = new FileInputStream(fileMenu)) {
             int menu;
             String message = "";
             while ((menu = fileInputStream.read())!= -1){
                 message=message+(char)menu;
+                Log.d("read", "readFile: " + message);
             }
             return message;
         } catch (IOException e) {

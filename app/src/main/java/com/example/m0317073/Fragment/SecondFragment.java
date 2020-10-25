@@ -16,6 +16,7 @@ import com.example.m0317073.Model.Menu;
 import com.example.m0317073.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -64,7 +65,13 @@ public class SecondFragment extends Fragment implements IMainActivity {
     }
 
     @Override
-    public void resetAddForm() {
+    public void saveFile(String menu) throws IOException {
 
     }
+
+    @Override
+    public String readFile() {
+        return null;
+    }
+
 }

@@ -6,4 +6,5 @@ public interface FragmentListener {
     void changePage(int page);
     void closeApplication();
     void getDetailsMenu(Menu menu, int position);
+    void reset();
 }

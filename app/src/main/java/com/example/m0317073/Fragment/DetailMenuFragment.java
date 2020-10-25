@@ -59,10 +59,11 @@ public class DetailMenuFragment extends Fragment {
         return view;
     }
 
-//    public void setMessage(String tag, String bahan, String langkah, String resto){
-//        this.tag.setText(tag);
-//        this.bahan.setText(bahan);
-//        this.langkah.setText(langkah);
-//        this.resto.setText(resto);
-//    }
+    public void reset(){
+        this.namaMenu.setText(this.menu.getNama_menu());
+        this.tag.setText(this.menu.getTag());
+        this.bahan.setText(this.menu.getBahan());
+        this.langkah.setText(this.menu.getLangkah_masak());
+        this.resto.setText(this.menu.getTersedia());
+    }
 }

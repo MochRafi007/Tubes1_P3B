@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         drawer.addDrawerListener(abdt);
         abdt.syncState();
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
-        ft.add(R.id.fragment_container, this.mainFragment)
+        ft.add(R.id.fragment_container, this.secondFragment)
                 .addToBackStack(null)
                 .commit();
     }
@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                 ft.show(this.mainFragment);
 
             }else{
-                ft.add(R.id.fragment_container, this.mainFragment);
+                ft.add(R.id.fragment_container, this.mainFragment)
+                        .addToBackStack(null);
             }
             if(this.secondFragment.isAdded()){
                 this.drawer.closeDrawers();
@@ -117,8 +118,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                 this.drawer.closeDrawers();
                 ft.show(this.secondFragment);
             }else{
-                ft.add(R.id.fragment_container, this.secondFragment)
-                        .addToBackStack(null);
+                ft.add(R.id.fragment_container, this.secondFragment);
             }
             if(this.mainFragment.isAdded()){
                 ft.hide(this.mainFragment);

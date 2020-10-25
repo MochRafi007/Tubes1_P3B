@@ -6,6 +6,13 @@
     android:background="@color/white">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/random"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints"></TextView>
+
+    <TextView
         android:id="@+id/tv_makan_apa"
         android:textSize="16dp"
         android:layout_width="wrap_content"

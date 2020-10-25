@@ -27,8 +27,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener,  IMainActivity {
     private Toolbar toolbar;
-    private ListView listView;
-    private ListMakanan listMakanan;
     private DrawerLayout drawer;
     private SecondFragment secondFragment;
     private DetailMenuFragment detailMenuFragment;
@@ -41,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.listView = this.findViewById(R.id.list_view_menu);
         this.mainPresenter = new MainPresenter(this, this);
         this.mainFragment = new MainFragment(mainPresenter);
         this.secondFragment = new SecondFragment(mainPresenter);

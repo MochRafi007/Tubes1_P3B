@@ -1,98 +1,81 @@
 package com.example.m0317073.Adapder;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.m0317073.MainPresenter.MainPresenter;
+import com.example.m0317073.Model.Menu;
 import com.example.m0317073.R;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListMakanan extends BaseExpandableListAdapter {
-    private List<String> listGroup;
-    private HashMap<String, List<Makanan>> listItem;
-    private Context context;
+public class ListMakanan extends BaseAdapter {
+    private List<Menu> listItems;
+    private Activity activity;
+    private MainPresenter mainPresenter;
 
-    public ListMakanan(Context context, List<String> Group, HashMap<String, List<Makanan>> Item){
-        listGroup = Group;
-        this.context = context;
-        listItem = Item;
+    public ListMakanan(Activity activity, MainPresenter mainPresenter){
+        this.activity = activity;
+        this.listItems = new ArrayList<>();
+        this.mainPresenter = mainPresenter;
     }
-
-
-    @Override
-    public int getGroupCount() {
-        return  listGroup.size();
-    }
-
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        return listItem.get(getGroup(groupPosition)).size();
+    public void update(List<Menu> foods) {
+        this.listItems.clear();
+        this.listItems.addAll((foods));
+        this.notifyDataSetChanged();
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
-        return listGroup.get(groupPosition);
+    public int getCount() {
+        return listItems.size();
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return listItem.get(getGroup(groupPosition)).get(childPosition);
+    public Object getItem(int i) {
+        return listItems.get(i);
     }
 
     @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
+    public long getItemId(int i) {
+        return 0;
     }
 
     @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        if (convertView == null){
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_group, null);
+    public View getView(int i, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(this.activity).inflate(R.layout.list_item_group, parent, false);
+            viewHolder = new ViewHolder(convertView,this.mainPresenter);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        TextView namaMakanan = (TextView) convertView.findViewById(R.id.namaMenu);
-        namaMakanan.setText((String) getGroup(groupPosition));
-
+        viewHolder.updateView((Menu) this.getItem(i),i);
         return convertView;
+
     }
 
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        if (convertView == null){
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item,null);
+    private class ViewHolder{
+        protected TextView namaMenu;
+        protected MainPresenter mainPresenter;
+        protected int position;
+
+        public ViewHolder(View convertView, MainPresenter mainPresenter) {
+            this.namaMenu = convertView.findViewById(R.id.namaMenu);
+            this.mainPresenter = mainPresenter;
         }
-        TextView tag = (TextView) convertView.findViewById(R.id.tag_hasil);
-        TextView bahan = (TextView) convertView.findViewById(R.id.bahan_hasil);
-        TextView langkah = (TextView) convertView.findViewById(R.id.langkah_hasil);
-        TextView resto = (TextView) convertView.findViewById(R.id.resto_hasil);
 
-        Makanan makanan = (Makanan) getChild(groupPosition,childPosition);
-        tag.setText(makanan.getTag());
-        bahan.setText(makanan.getBahan());
-        langkah.setText(makanan.getLangkahMemasak());
-        resto.setText(makanan.getResto());
 
-        return convertView;
+        public void updateView(Menu food, int position){
+            this.position = position;
+            this.namaMenu.setText((food.getNama_menu()));
+        }
     }
 
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
-    }
+
 }

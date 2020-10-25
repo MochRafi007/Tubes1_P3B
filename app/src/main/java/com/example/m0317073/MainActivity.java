@@ -8,19 +8,31 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.m0317073.Adapder.ListMakanan;
+import com.example.m0317073.Fragment.DetailMenuFragment;
 import com.example.m0317073.Fragment.FragmentListener;
 import com.example.m0317073.Fragment.MainFragment;
 import com.example.m0317073.Fragment.MakeMenuFragment;
 import com.example.m0317073.Fragment.SecondFragment;
+import com.example.m0317073.MainPresenter.IMainActivity;
+import com.example.m0317073.MainPresenter.MainPresenter;
+import com.example.m0317073.Model.Menu;
+
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements FragmentListener,  IMainActivity {
     private Toolbar toolbar;
+    private ListView listView;
+    private ListMakanan listMakanan;
     private DrawerLayout drawer;
     private SecondFragment secondFragment;
+    private DetailMenuFragment detailMenuFragment;
+    private MainPresenter mainPresenter;
     private MainFragment mainFragment;
     public FragmentManager fragmentManager;
     private MakeMenuFragment makeMenuFragment;
@@ -29,10 +41,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.mainFragment = new MainFragment();
-        this.secondFragment = new SecondFragment();
+        this.listView = this.findViewById(R.id.list);
+        this.mainPresenter = new MainPresenter(this);
+        this.mainFragment = new MainFragment(mainPresenter);
+        this.secondFragment = new SecondFragment(mainPresenter);
+        this.makeMenuFragment= new MakeMenuFragment(mainPresenter);
         this.fragmentManager = this.getSupportFragmentManager();
-        this.makeMenuFragment= new MakeMenuFragment();
+        this.detailMenuFragment = new DetailMenuFragment();
 
         //Toolbar
         this.drawer = findViewById(R.id.drawer_layout);
@@ -88,14 +103,24 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
         ft.commit();
     }
 
-    public void onClick(View view)
-    {
-
-    }
-
     @Override
     public void closeApplication() {
         this.moveTaskToBack(true);
         this.finish();
+    }
+
+    @Override
+    public void changeMessage(String tag, String bahan, String langkah, String resto) {
+        detailMenuFragment.setMessage(tag,bahan,langkah,resto);
+    }
+
+    @Override
+    public void updateList(List<Menu> foodList) {
+        this.listMakanan.update(foodList);
+    }
+
+    @Override
+    public void resetAddForm() {
+
     }
 }

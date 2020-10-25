@@ -10,6 +10,14 @@ public class Menu implements Serializable {
     private String langkah_masak;
     private String tersedia;
 
+    public Menu(String namaMakan, String tag, String bahan, String langkahMasak, String lokasi) {
+        this.nama_menu = namaMakan;
+        this.tag = tag;
+        this.bahan = bahan;
+        this.langkah_masak = langkahMasak;
+        this.tersedia = lokasi;
+    }
+
     public void setId(long id) {
         this.id = id;
     }

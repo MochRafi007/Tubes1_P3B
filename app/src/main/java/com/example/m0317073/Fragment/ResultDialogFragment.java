@@ -23,8 +23,6 @@ public class ResultDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_result_dialog, container, false);
         this.textView = view.findViewById(R.id.tvResult);
-       // String menu = mainPresenter.randomMenu();
-     //   this.textView.setText(menu);
         this.textView.setText(getTag());
         return view;
     }

@@ -1,6 +1,8 @@
 package com.example.m0317073.MainPresenter;
 
 
+import android.util.Log;
+
 import com.example.m0317073.Fragment.FragmentListener;
 import com.example.m0317073.Model.Menu;
 
@@ -23,6 +25,24 @@ public class MainPresenter {
         this.ui = active;
         this.foodList = new LinkedList<Menu>();
         this.listener = fragmentListener;
+    }
+
+    public void loadData() throws JSONException{
+        String menu = this.ui.readFile();
+        Log.d("menu", "loadData: " + menu );
+        JSONArray jsonArray = new JSONArray(menu);
+        Menu[] menus = new Menu[jsonArray.length()];
+        for(int i=0;i<jsonArray.length();i++){
+            JSONObject menuMakan = jsonArray.getJSONObject(i);
+            menuMakan = menuMakan.getJSONObject("menu");
+            menus[i] = new Menu(menuMakan.getString("namaMenu"),
+                                menuMakan.getString("tag"),
+                                menuMakan.getString("bahan"),
+                                menuMakan.getString("langkah"),
+                                menuMakan.getString("resto"));
+        }
+        this.foodList.addAll(Arrays.asList(menus));
+        this.ui.updateList(this.foodList);
     }
 
     public void deleteList(int position) throws JSONException{

@@ -10,17 +10,17 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.m0317073.Adapder.ListMakanan;
-import com.example.m0317073.MainPresenter.IMainActivity;
 import com.example.m0317073.MainPresenter.MainPresenter;
 import com.example.m0317073.Model.Menu;
 import com.example.m0317073.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.IOException;
+import org.json.JSONException;
+
 import java.util.List;
 
 
-public class SecondFragment extends Fragment implements IMainActivity {
+public class SecondFragment extends Fragment {
     private FragmentListener listener;
     private ListMakanan listMakanan;
     private MainPresenter mainPresenter;
@@ -46,9 +46,15 @@ public class SecondFragment extends Fragment implements IMainActivity {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
         this.listView = view.findViewById(R.id.list_view_menu);
-        this.mainPresenter = new MainPresenter(this, listener);
         this.listMakanan = new ListMakanan(getActivity(),this.mainPresenter);
         this.listView.setAdapter(this.listMakanan);
+
+        try {
+            this.mainPresenter.loadData();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,19 +65,8 @@ public class SecondFragment extends Fragment implements IMainActivity {
         return view;
     }
 
-    @Override
     public void updateList(List<Menu> foodList) {
         this.listMakanan.update(foodList);
-    }
-
-    @Override
-    public void saveFile(String menu) throws IOException {
-
-    }
-
-    @Override
-    public String readFile() {
-        return null;
     }
 
 }

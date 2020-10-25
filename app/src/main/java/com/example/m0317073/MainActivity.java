@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     private DetailMenuFragment detailMenuFragment;
     private EditMenuFragment editMenuFragment;
     private MainPresenter mainPresenter;
-    static final String FILE_NAME = "menu.txt";
     public FragmentManager fragmentManager;
 
     @Override

@@ -27,11 +27,7 @@ public class ListMakanan extends BaseAdapter {
         this.listItems = new ArrayList<>();
         this.mainPresenter = mainPresenter;
     }
-    public void update(List<Menu> foods) {
-        this.listItems.clear();
-        this.listItems.addAll((foods));
-        this.notifyDataSetChanged();
-    }
+
 
     @Override
     public int getCount() {
@@ -48,12 +44,18 @@ public class ListMakanan extends BaseAdapter {
         return 0;
     }
 
+    public void update(List<Menu> menu) {
+        this.listItems.clear();
+        this.listItems.addAll(menu);
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(this.activity).inflate(R.layout.list_item_group, parent, false);
-            viewHolder = new ViewHolder(convertView,this.mainPresenter,this.listItems);
+            viewHolder = new ViewHolder(convertView,this.mainPresenter);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -64,21 +66,19 @@ public class ListMakanan extends BaseAdapter {
     }
 
     private class ViewHolder implements View.OnClickListener{
+        protected MainPresenter presenter;
         protected TextView namaMenu;
-        private List<Menu> listMenu;
-        private Menu menu;
-        protected Button edit;
-        protected Button delete;
-        protected MainPresenter mainPresenter;
         protected int position;
+        private Menu menu;
+        private Button edit;
+        private Button delete;
 
-        public ViewHolder(View convertView, MainPresenter mainPresenter, List<Menu> menuList) {
+        public ViewHolder(View convertView, MainPresenter mainPresenter) {
             this.namaMenu = convertView.findViewById(R.id.namaMenu);
             this.edit = convertView.findViewById(R.id.editDetail);
             this.delete = convertView.findViewById(R.id.deleteMakanan);
-            this.listMenu = new LinkedList<Menu>();
-            this.listMenu = menuList;
-            this.mainPresenter = mainPresenter;
+            this.presenter = mainPresenter;
+            this.delete.setOnClickListener(this);
         }
 
 
@@ -92,8 +92,11 @@ public class ListMakanan extends BaseAdapter {
         @Override
         public void onClick(View v) {
             if(v.getId() == namaMenu.getId()){
-                this.mainPresenter.detailsMenu(this.menu, this.position);
-                this.mainPresenter.changePage(4);
+                this.presenter.detailsMenu(this.menu, this.position);
+                this.presenter.changePage(4);
+            }
+            else if(v.getId() == delete.getId()){
+                presenter.deleteList(this.position);
             }
         }
     }

@@ -1,10 +1,10 @@
 package com.example.m0317073.MainPresenter;
 
 
-import com.example.m0317073.Adapder.ListMakanan;
 import com.example.m0317073.Fragment.FragmentListener;
 import com.example.m0317073.Model.Menu;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,9 +20,9 @@ public class MainPresenter {
     }
 
 //    public void loadData(){
-////        this.foodList.addAll(Arrays.asList(MockFood.foodObjectArr));
-////        this.ui.updateList(this.foodList);
-////    }
+//        this.foodList.addAll(Arrays.asList(MockData.foodObjectArr));
+//        this.ui.updateList(this.foodList);
+//    }w
 
     public void deleteList(int position){
         this.foodList.remove(position);

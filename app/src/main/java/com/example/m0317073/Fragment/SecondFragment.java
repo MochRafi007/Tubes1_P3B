@@ -59,17 +59,6 @@ public class SecondFragment extends Fragment implements IMainActivity {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().setTitle("Menu");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
     public void updateList(List<Menu> foodList) {
         this.listMakanan.update(foodList);
     }

@@ -26,7 +26,7 @@
             android:layout_weight="5"
             android:layout_height="match_parent"
             android:text="Edit"
-            android:textSize="12dp"
+            android:textSize="10dp"
             >
         </Button>
         <Button
@@ -35,7 +35,7 @@
             android:layout_weight="5"
             android:layout_height="match_parent"
             android:text="Delete"
-            android:textSize="12dp"
+            android:textSize="10dp"
             >
         </Button>
     </LinearLayout>

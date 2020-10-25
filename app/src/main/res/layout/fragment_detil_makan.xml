@@ -19,6 +19,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/detil_namaMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/namaMakan"

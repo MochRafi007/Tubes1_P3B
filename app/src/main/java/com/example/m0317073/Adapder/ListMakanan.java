@@ -5,13 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.m0317073.Fragment.FragmentListener;
 import com.example.m0317073.MainPresenter.MainPresenter;
 import com.example.m0317073.Model.Menu;
 import com.example.m0317073.R;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListMakanan extends BaseAdapter {
@@ -50,7 +53,7 @@ public class ListMakanan extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(this.activity).inflate(R.layout.list_item_group, parent, false);
-            viewHolder = new ViewHolder(convertView,this.mainPresenter);
+            viewHolder = new ViewHolder(convertView,this.mainPresenter,this.listItems);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -60,20 +63,38 @@ public class ListMakanan extends BaseAdapter {
 
     }
 
-    private class ViewHolder{
+    private class ViewHolder implements View.OnClickListener{
         protected TextView namaMenu;
+        private List<Menu> listMenu;
+        private Menu menu;
+        protected Button edit;
+        protected Button delete;
         protected MainPresenter mainPresenter;
         protected int position;
 
-        public ViewHolder(View convertView, MainPresenter mainPresenter) {
+        public ViewHolder(View convertView, MainPresenter mainPresenter, List<Menu> menuList) {
             this.namaMenu = convertView.findViewById(R.id.namaMenu);
+            this.edit = convertView.findViewById(R.id.editDetail);
+            this.delete = convertView.findViewById(R.id.deleteMakanan);
+            this.listMenu = new LinkedList<Menu>();
+            this.listMenu = menuList;
             this.mainPresenter = mainPresenter;
         }
 
 
         public void updateView(Menu food, int position){
             this.position = position;
+            this.namaMenu.setOnClickListener(this);
             this.namaMenu.setText((food.getNama_menu()));
+            this.menu = food;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(v.getId() == namaMenu.getId()){
+                this.mainPresenter.detailsMenu(this.menu, this.position);
+                this.mainPresenter.changePage(4);
+            }
         }
     }
 

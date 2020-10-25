@@ -56,30 +56,29 @@ public class MakeMenuFragment extends Fragment implements View.OnClickListener {
         this.resto = view.findViewById(R.id.make_resto);
         this.fab = view.findViewById(R.id.fab_edit);
         fab.setOnClickListener(this);
-        listView = view.findViewById(R.id.list);
+        listView = view.findViewById(R.id.list_view_menu);
         return view;
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == this.fab.getId()){
-            String menu = namaMenu.getText().toString();
-            String tagMakan = tag.getText().toString();
-            String bahanMakan = bahan.getText().toString();
-            String langkahMasak = langkah.getText().toString();
-            String restoMakaan = resto.getText().toString();
             if(!this.namaMenu.getText().toString().equals("") && !this.tag.getText().toString().equals("")
                 && !this.bahan.getText().toString().equals("") && !this.langkah.getText().toString().equals("")
                     && !this.resto.getText().toString().equals("")){
-                listener.changeMessage(tagMakan, bahanMakan, langkahMasak, restoMakaan);
+                this.mainPresenter.addList(this.namaMenu.getText().toString(), this.tag.getText().toString(), this.bahan.getText().toString(), this.langkah.getText().toString(), this.resto.getText().toString());
                 View view1 = getActivity().getCurrentFocus();
                 if (view1 != null) {
                     InputMethodManager im = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     im.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                this.mainPresenter.addList(this.namaMenu.getText().toString(), this.tag.getText().toString(), this.bahan.getText().toString(), this.langkah.getText().toString(), this.resto.getText().toString());
                 listener.changePage(2);
             }
+            this.namaMenu.setText("");
+            this.tag.setText("");
+            this.bahan.setText("");
+            this.langkah.setText("");
+            this.resto.setText("");
         }
     }
 }

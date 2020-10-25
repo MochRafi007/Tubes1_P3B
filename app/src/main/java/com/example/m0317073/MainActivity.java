@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.listView = this.findViewById(R.id.list);
-        this.mainPresenter = new MainPresenter(this);
+        this.listView = this.findViewById(R.id.list_view_menu);
+        this.mainPresenter = new MainPresenter(this, this);
         this.mainFragment = new MainFragment(mainPresenter);
         this.secondFragment = new SecondFragment(mainPresenter);
         this.makeMenuFragment= new MakeMenuFragment(mainPresenter);
         this.fragmentManager = this.getSupportFragmentManager();
-        this.detailMenuFragment = new DetailMenuFragment();
+        this.detailMenuFragment = new DetailMenuFragment(mainPresenter);
 
         //Toolbar
         this.drawer = findViewById(R.id.drawer_layout);
@@ -75,6 +75,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
                 this.drawer.closeDrawers();
                 ft.hide(this.secondFragment);
             }
+            if(this.makeMenuFragment.isAdded()){
+                ft.hide(this.makeMenuFragment);
+            }
+            if (this.detailMenuFragment.isAdded()){
+                ft.hide(this.detailMenuFragment);
+            }
         }else if(page==2){
             if(this.secondFragment.isAdded()){
                 this.drawer.closeDrawers();
@@ -86,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             if(this.mainFragment.isAdded()){
                 ft.hide(this.mainFragment);
             }
+            if (this.makeMenuFragment.isAdded()){
+                ft.hide(this.makeMenuFragment);
+            }
+            if (this.detailMenuFragment.isAdded()){
+                ft.hide(this.detailMenuFragment);
+            }
         }
         else if(page==3){
             if(this.makeMenuFragment.isAdded()){
@@ -96,6 +108,29 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
             }
             if(this.secondFragment.isAdded()){
                 ft.hide(this.secondFragment);
+            }
+            if (this.mainFragment.isAdded()){
+                ft.hide(this.mainFragment);
+            }
+            if (this.detailMenuFragment.isAdded()){
+                ft.hide(this.detailMenuFragment);
+            }
+        }
+        else if (page==4){
+            if (this.detailMenuFragment.isAdded()){
+                ft.show(this.detailMenuFragment);
+            }else {
+                ft.add(R.id.fragment_container, this.detailMenuFragment)
+                        .addToBackStack(null);
+            }
+            if (this.secondFragment.isAdded()){
+                ft.hide(this.secondFragment);
+            }
+            if (this.mainFragment.isAdded()){
+                ft.hide(this.mainFragment);
+            }
+            if (this.makeMenuFragment.isAdded()){
+                ft.hide(this.makeMenuFragment);
             }
         }
 
@@ -110,13 +145,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener,
     }
 
     @Override
-    public void changeMessage(String tag, String bahan, String langkah, String resto) {
-        detailMenuFragment.setMessage(tag,bahan,langkah,resto);
+    public void getDetailsMenu(Menu menu, int position) {
+        this.detailMenuFragment.setMenu(menu, position);
     }
 
     @Override
     public void updateList(List<Menu> foodList) {
-        this.listMakanan.update(foodList);
+        this.secondFragment.updateList(foodList);
     }
 
     @Override

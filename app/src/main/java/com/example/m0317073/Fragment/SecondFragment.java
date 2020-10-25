@@ -44,8 +44,8 @@ public class SecondFragment extends Fragment implements IMainActivity {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
-        listView = view.findViewById(R.id.list);
-        this.mainPresenter = new MainPresenter(this);
+        this.listView = view.findViewById(R.id.list_view_menu);
+        this.mainPresenter = new MainPresenter(this, listener);
         this.listMakanan = new ListMakanan(getActivity(),this.mainPresenter);
         this.listView.setAdapter(this.listMakanan);
         FloatingActionButton fab = view.findViewById(R.id.fab);

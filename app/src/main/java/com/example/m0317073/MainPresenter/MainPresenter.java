@@ -1,6 +1,8 @@
 package com.example.m0317073.MainPresenter;
 
 
+import com.example.m0317073.Adapder.ListMakanan;
+import com.example.m0317073.Fragment.FragmentListener;
 import com.example.m0317073.Model.Menu;
 
 import java.util.LinkedList;
@@ -9,10 +11,12 @@ import java.util.List;
 public class MainPresenter {
     protected List<Menu> foodList;
     protected IMainActivity ui;
+    protected FragmentListener listener;
 
-    public MainPresenter(IMainActivity active){
+    public MainPresenter(IMainActivity active, FragmentListener fragmentListener){
         this.ui = active;
         this.foodList = new LinkedList<Menu>();
+        this.listener = fragmentListener;
     }
 
 //    public void loadData(){
@@ -32,5 +36,12 @@ public class MainPresenter {
         this.ui.resetAddForm();
     }
 
+    public void detailsMenu(Menu menu, int position){
+        this.listener.getDetailsMenu(menu, position);
+    }
+
+    public void changePage(int position){
+        this.listener.changePage(position);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.m0317073.Adapder;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.m0317073.Fragment.FragmentListener;
 import com.example.m0317073.MainPresenter.MainPresenter;
 import com.example.m0317073.Model.Menu;
 import com.example.m0317073.R;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ListMakanan extends BaseAdapter {
@@ -60,7 +61,7 @@ public class ListMakanan extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.updateView((Menu) this.getItem(i),i);
+        viewHolder.updateView((Menu)this.getItem(i),i);
         return convertView;
 
     }
@@ -79,6 +80,7 @@ public class ListMakanan extends BaseAdapter {
             this.delete = convertView.findViewById(R.id.deleteMakanan);
             this.presenter = mainPresenter;
             this.delete.setOnClickListener(this);
+            this.edit.setOnClickListener(this);
         }
 
 
@@ -92,11 +94,20 @@ public class ListMakanan extends BaseAdapter {
         @Override
         public void onClick(View v) {
             if(v.getId() == namaMenu.getId()){
+                Log.d("size", "onClick: " + getItem(position));
                 this.presenter.detailsMenu(this.menu, this.position);
                 this.presenter.changePage(4);
             }
             else if(v.getId() == delete.getId()){
-                presenter.deleteList(this.position);
+                try {
+                    presenter.deleteList(position);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (v.getId() == edit.getId()){
+                this.presenter.detailsMenu(this.menu, position);
+                this.presenter.changePage(5);
             }
         }
     }

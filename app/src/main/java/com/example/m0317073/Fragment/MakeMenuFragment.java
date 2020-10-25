@@ -13,20 +13,24 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.m0317073.Adapder.ListMakanan;
+import com.example.m0317073.MainActivity;
 import com.example.m0317073.MainPresenter.MainPresenter;
 import com.example.m0317073.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class MakeMenuFragment extends Fragment implements View.OnClickListener {
+    MainActivity activity;
     EditText namaMenu;
     EditText tag;
     EditText bahan;
     EditText langkah;
     EditText resto;
     FloatingActionButton fab;
-    private FragmentListener listener;
-    ListMakanan listMakanan;
-    ListView listView;
+    FragmentListener listener;
     MainPresenter mainPresenter;
 
     @Override
@@ -41,9 +45,10 @@ public class MakeMenuFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    public MakeMenuFragment(MainPresenter mainPresenter)
+    public MakeMenuFragment(MainPresenter mainPresenter, MainActivity activity)
     {
         this.mainPresenter = mainPresenter;
+        this.activity = activity;
     }
 
     @Override
@@ -56,7 +61,6 @@ public class MakeMenuFragment extends Fragment implements View.OnClickListener {
         this.resto = view.findViewById(R.id.make_resto);
         this.fab = view.findViewById(R.id.fab_edit);
         fab.setOnClickListener(this);
-        listView = view.findViewById(R.id.list_view_menu);
         return view;
     }
 
@@ -66,7 +70,11 @@ public class MakeMenuFragment extends Fragment implements View.OnClickListener {
             if(!this.namaMenu.getText().toString().equals("") && !this.tag.getText().toString().equals("")
                 && !this.bahan.getText().toString().equals("") && !this.langkah.getText().toString().equals("")
                     && !this.resto.getText().toString().equals("")){
-                this.mainPresenter.addList(this.namaMenu.getText().toString(), this.tag.getText().toString(), this.bahan.getText().toString(), this.langkah.getText().toString(), this.resto.getText().toString());
+                try {
+                    this.mainPresenter.addList(this.namaMenu.getText().toString(), this.tag.getText().toString(), this.bahan.getText().toString(), this.langkah.getText().toString(), this.resto.getText().toString());
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                }
                 View view1 = getActivity().getCurrentFocus();
                 if (view1 != null) {
                     InputMethodManager im = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
